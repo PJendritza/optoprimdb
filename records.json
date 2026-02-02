@@ -1,22 +1,5 @@
 [
-{
-  "id": "jazayeri-2012-nn",
-  "title": "Saccadic eye movements evoked by optogenetic activation of primate V1",
-  "authors": ["Jazayeri", "Lindbloom-Brown", "Horwitz"],
-  "year": 2012,
-  "journal": "Nature Neuroscience",
-  "doi": "10.1038/nn.3210",
-  "species": ["macaque"],
-  "brain_regions": ["V1"],
-  "opsins": ["ChR2"],
-  "viral_vectors": ["AAV1"],
-  "promoters": ["hSyn"],
-  "histology": "positive",
-  "behavioral_effects": "positive",
-  "physiology_effects": "mixed",
-  "source_type": "journal",
-  "notes": ""
-},
+
 {
   "id": "el-shamayleh-2017-neuron",
   "title": "Selective Optogenetic Control of Purkinje Cells in Monkey Cerebellum",
@@ -160,7 +143,67 @@
   "physiology_effects": "positive",
   "source_type": "journal",
   "notes": ""
+},
+
+{
+  "id": "jendritza-2023-natcomm",
+  "title": "Multi-area recordings and optogenetics in the awake, behaving marmoset",
+  "authors": ["Jendritza", "Klein", "Fries"],
+  "year": 2023,
+  "journal": "Nature Communications",
+  "doi": "https://doi.org/10.1038/s41467-023-36217-5",
+  "species": ["marmoset"],
+  "brain_regions": ["V6"],
+  "opsins": ["Chronos"],
+  "viral_vectors": ["AAV1"],
+  "promoters": ["CaMKIIa"],
+  "histology": "not_tested",
+  "behavioral_effects": "positive",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+
+{
+  "id": "macdougall-2016-jn",
+  "title": "Optogenetic manipulation of neural circuits in awake marmosets",
+  "authors": ["MacDougall", "Nummela", "Coop", "Disney", "Mitchell", "Miller"],
+  "year": 2016,
+  "journal": "Journal of Neurophysiology",
+  "doi": "https://doi.org/10.1152/jn.00197.2016",
+  "species": ["marmoset"],
+  "brain_regions": ["temporal cortex", "frontal cortex", "somatosensory cortex"],
+  "opsins": ["ChR2"],
+  "viral_vectors": ["AAV5", "AAV9"],
+  "promoters": ["hSyn"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+
+{
+  "id": "alekseev-2025-nbe",
+  "title": "Efficient and sustained optogenetic control of sensory and cardiac systems",
+  "authors": ["Alekseev", "Hunniford", "Zerche", "Jeschke", "El May", "Vavakou", "Siegenthaler", "Hüser", "Kiehn", "Garrido-Charles", "Meyer", "Rambousky", "Alvanos", "Witzke", "Rojas-Garcia", "Draband", "Cyganek", "Klein", "Ruther", "Huet", "Trenholm", "Macé", "Kusch", "Bruegmann", "Moser"],
+  "year": 2025,
+  "journal": "Nature Biomedical Engineering",
+  "doi": "https://doi.org/10.1038/s41551-025-01461-1",
+  "species": ["marmoset"],
+  "brain_regions": ["cochlea"],
+  "opsins": ["ChReef"],
+  "viral_vectors": ["AAV-PHP.eB"],
+  "promoters": ["hSyn"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "mixed",
+  "source_type": "journal",
+  "notes": ""
 }
+
+
+
 
 
 

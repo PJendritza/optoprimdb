@@ -1,6 +1,16 @@
 import { Grid, html } from "https://cdn.jsdelivr.net/npm/gridjs@6.2.0/dist/gridjs.module.js";
 
+// ---------- load data ----------
 const records = await fetch("./records.json").then(r => r.json());
+
+// add a normalized doi_url field
+records.forEach(r => {
+  if (r.doi) {
+    r.doi_url = r.doi.startsWith("http") ? r.doi : `https://doi.org/${r.doi}`;
+  } else {
+    r.doi_url = "";
+  }
+});
 
 const speciesDiv = document.getElementById("species");
 const opsinsDiv  = document.getElementById("opsins");
@@ -15,13 +25,11 @@ let selected = {
 let grid;
 
 // ---------- helpers ----------
-
 function uniqueValues(field) {
   return [...new Set(records.flatMap(r => r[field] || []))].sort();
 }
 
 // ---------- facets ----------
-
 function renderFacet(container, field) {
   container.innerHTML = "";
   uniqueValues(field).forEach(v => {
@@ -43,20 +51,15 @@ function toggleFacet(field, value) {
 }
 
 // ---------- filtering ----------
-
 function filteredRecords() {
   return records.filter(r =>
-    (!selected.species.length ||
-      selected.species.some(s => r.species.includes(s))) &&
-    (!selected.opsins.length ||
-      selected.opsins.some(o => r.opsins.includes(o))) &&
-    (!selected.brain_regions.length ||
-      selected.brain_regions.some(b => r.brain_regions.includes(b)))
+    (!selected.species.length || selected.species.some(s => r.species.includes(s))) &&
+    (!selected.opsins.length  || selected.opsins.some(o => r.opsins.includes(o))) &&
+    (!selected.brain_regions.length || selected.brain_regions.some(b => r.brain_regions.includes(b)))
   );
 }
 
 // ---------- grid ----------
-
 function makeGrid(data) {
   return new Grid({
     columns: [
@@ -65,7 +68,20 @@ function makeGrid(data) {
       {
         name: "Title",
         sort: true,
-        formatter: cell => html(`<span title="${cell}">${cell}</span>`)
+        formatter: (cell, row) => {
+          // last column is the hidden doi_url
+          const doiUrl = row.cells[row.cells.length - 1].data;
+
+          if (!doiUrl) {
+            return html(`<span title="${cell}">${cell}</span>`);
+          }
+
+          return html(`
+            <a href="${doiUrl}" target="_blank" rel="noopener" title="Open DOI">
+              ${cell}
+            </a>
+          `);
+        }
       },
 
       {
@@ -77,7 +93,10 @@ function makeGrid(data) {
       { name: "Journal", sort: true },
       { name: "Species", sort: true },
       { name: "Brain areas", sort: true },
-      { name: "Opsins", sort: true }
+      { name: "Opsins", sort: true },
+
+      // hidden column to carry doiUrl reliably
+      { name: "doi_url", hidden: true }
     ],
 
     data: data.map(r => [
@@ -87,24 +106,19 @@ function makeGrid(data) {
       r.journal,
       r.species.join(", "),
       r.brain_regions.join(", "),
-      r.opsins.join(", ")
+      r.opsins.join(", "),
+      r.doi_url
     ]),
 
-search: true,
+    search: true,
 
-language: {
-  search: {
-    placeholder: "Search…"
-  }
-},
-
-sort: true,
+    language: {
+      search: { placeholder: "Search…" }
+    },
 
     sort: true,
 
-    pagination: {
-      limit: 15
-    }
+    pagination: { limit: 15 }
   });
 }
 
@@ -116,7 +130,6 @@ function updateGrid() {
 }
 
 // ---------- init ----------
-
 renderFacet(speciesDiv, "species");
 renderFacet(opsinsDiv, "opsins");
 renderFacet(brainDiv, "brain_regions");

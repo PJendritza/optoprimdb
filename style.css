@@ -119,3 +119,12 @@ h1 {
 .gridjs-td:nth-child(7) {
   min-width: 120px;
 }
+
+.gridjs-table a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gridjs-table a:hover {
+  text-decoration: underline;
+}
