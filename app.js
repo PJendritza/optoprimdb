@@ -1,11 +1,10 @@
-import { Grid } from "https://cdn.jsdelivr.net/npm/gridjs@6.2.0/dist/gridjs.module.js";
+import { Grid, html } from "https://cdn.jsdelivr.net/npm/gridjs@6.2.0/dist/gridjs.module.js";
 
 const records = await fetch("./records.json").then(r => r.json());
 
 const speciesDiv = document.getElementById("species");
 const opsinsDiv  = document.getElementById("opsins");
 const brainDiv   = document.getElementById("brain_areas");
-const searchInput = document.getElementById("search");
 
 let selected = {
   species: [],
@@ -62,32 +61,47 @@ function makeGrid(data) {
   return new Grid({
     columns: [
       { name: "Year", sort: true },
+
       {
         name: "Title",
         sort: true,
-        formatter: cell =>
-          `<span title="${cell}">${cell}</span>`
+        formatter: cell => html(`<span title="${cell}">${cell}</span>`)
       },
+
       {
         name: "Authors",
         sort: true,
-        formatter: cell =>
-          `<span title="${cell}">${cell}</span>`
+        formatter: cell => html(`<span title="${cell}">${cell}</span>`)
       },
+
       { name: "Journal", sort: true },
       { name: "Species", sort: true },
+      { name: "Brain areas", sort: true },
       { name: "Opsins", sort: true }
     ],
+
     data: data.map(r => [
       r.year,
       r.title,
       r.authors.join(", "),
       r.journal,
       r.species.join(", "),
+      r.brain_regions.join(", "),
       r.opsins.join(", ")
     ]),
-    search: true,
+
+search: true,
+
+language: {
+  search: {
+    placeholder: "Search…"
+  }
+},
+
+sort: true,
+
     sort: true,
+
     pagination: {
       limit: 15
     }

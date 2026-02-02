@@ -71,16 +71,51 @@ h1 {
   font-size: 0.95rem;
 }
 
-/* ---------- Grid tweaks ---------- */
+/* ---------- Grid.js tweaks ---------- */
 
-.gridjs-container {
-  font-size: 0.9rem;
+.gridjs-table {
+  font-size: 0.95rem;
 }
 
-.gridjs-th {
+/* Year */
+.gridjs-th:nth-child(1),
+.gridjs-td:nth-child(1) {
+  min-width: 70px;
+  text-align: center;
+}
+
+/* Title */
+.gridjs-th:nth-child(2),
+.gridjs-td:nth-child(2) {
+  min-width: 360px;
+}
+
+/* Authors */
+.gridjs-th:nth-child(3),
+.gridjs-td:nth-child(3) {
+  min-width: 260px;
+}
+
+/* Journal */
+.gridjs-th:nth-child(4),
+.gridjs-td:nth-child(4) {
   white-space: nowrap;
 }
 
-.gridjs-td {
-  vertical-align: top;
+/* Species */
+.gridjs-th:nth-child(5),
+.gridjs-td:nth-child(5) {
+  min-width: 120px;
+}
+
+/* Brain areas */
+.gridjs-th:nth-child(6),
+.gridjs-td:nth-child(6) {
+  min-width: 220px;
+}
+
+/* Opsins */
+.gridjs-th:nth-child(7),
+.gridjs-td:nth-child(7) {
+  min-width: 120px;
 }
