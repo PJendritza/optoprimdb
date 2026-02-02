@@ -1,6 +1,5 @@
 import { Grid } from "https://cdn.jsdelivr.net/npm/gridjs@6.2.0/dist/gridjs.module.js";
 
-
 const records = await fetch("./records.json").then(r => r.json());
 
 const speciesDiv = document.getElementById("species");
@@ -11,16 +10,18 @@ const searchInput = document.getElementById("search");
 let selected = {
   species: [],
   opsins: [],
-  brain_areas: []
+  brain_regions: []
 };
 
 let grid;
 
-// ---------- Facets ----------
+// ---------- helpers ----------
 
 function uniqueValues(field) {
   return [...new Set(records.flatMap(r => r[field] || []))].sort();
 }
+
+// ---------- facets ----------
 
 function renderFacet(container, field) {
   container.innerHTML = "";
@@ -42,7 +43,7 @@ function toggleFacet(field, value) {
   updateGrid();
 }
 
-// ---------- Filtering ----------
+// ---------- filtering ----------
 
 function filteredRecords() {
   return records.filter(r =>
@@ -50,19 +51,29 @@ function filteredRecords() {
       selected.species.some(s => r.species.includes(s))) &&
     (!selected.opsins.length ||
       selected.opsins.some(o => r.opsins.includes(o))) &&
-    (!selected.brain_areas.length ||
-      selected.brain_areas.some(b => r.brain_regions.includes(b)))
+    (!selected.brain_regions.length ||
+      selected.brain_regions.some(b => r.brain_regions.includes(b)))
   );
 }
 
-// ---------- Grid ----------
+// ---------- grid ----------
 
 function makeGrid(data) {
   return new Grid({
     columns: [
       { name: "Year", sort: true },
-      { name: "Title", sort: true },
-      { name: "Authors", sort: true },
+      {
+        name: "Title",
+        sort: true,
+        formatter: cell =>
+          `<span title="${cell}">${cell}</span>`
+      },
+      {
+        name: "Authors",
+        sort: true,
+        formatter: cell =>
+          `<span title="${cell}">${cell}</span>`
+      },
       { name: "Journal", sort: true },
       { name: "Species", sort: true },
       { name: "Opsins", sort: true }
@@ -75,9 +86,7 @@ function makeGrid(data) {
       r.species.join(", "),
       r.opsins.join(", ")
     ]),
-    search: {
-      selector: cell => cell.toString()
-    },
+    search: true,
     sort: true,
     pagination: {
       limit: 15
@@ -92,16 +101,10 @@ function updateGrid() {
   grid.render(document.getElementById("grid"));
 }
 
-// ---------- Init ----------
+// ---------- init ----------
 
 renderFacet(speciesDiv, "species");
 renderFacet(opsinsDiv, "opsins");
 renderFacet(brainDiv, "brain_regions");
-
-searchInput.addEventListener("input", () => {
-  grid.updateConfig({
-    search: { keyword: searchInput.value }
-  }).forceRender();
-});
 
 updateGrid();
