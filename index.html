@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>OptoPrimDB</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<h1>OptoPrimDB</h1>
+
+<div class="about">
+  <p>
+    <strong>OptoPrimDB</strong> is an early-stage, experimental database that aims to
+    collect and organize published optogenetics studies in non-human primates.
+    The goal is to provide a simple, searchable overview of the primate
+    optogenetics literature with standardized paper-level metadata.
+  </p>
+
+  <p class="status">
+    This is a very early testing version. The database is incomplete, entries may
+    change, and the structure is still evolving.
+  </p>
+
+  <p class="meta">
+    Created by Patrick Jendritza · Last updated: February 2026
+  </p>
+</div>
+
+<div class="layout">
+
+  <aside class="facets">
+    <h3>Species</h3>
+    <div id="species"></div>
+
+    <h3>Opsins</h3>
+    <div id="opsins"></div>
+
+    <h3>Brain areas</h3>
+    <div id="brain_areas"></div>
+  </aside>
+
+  <main>
+    <input
+      id="search"
+      type="text"
+      placeholder="Search title, authors, or journal…"
+      class="search"
+    />
+
+    <table>
+      <thead>
+        <tr>
+          <th class="year sortable">Year</th>
+          <th class="sortable">Title</th>
+          <th class="authors sortable">Authors</th>
+          <th class="journal sortable">Journal</th>
+          <th class="sortable">Species</th>
+          <th class="sortable">Opsins</th>
+        </tr>
+      </thead>
+      <tbody id="results"></tbody>
+    </table>
+  </main>
+
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

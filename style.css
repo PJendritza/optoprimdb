@@ -1,0 +1,125 @@
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  margin: 24px;
+  color: #222;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+/* ---------- About block ---------- */
+
+.about {
+  max-width: 900px;
+  margin-bottom: 26px;
+  padding-left: 12px;
+  border-left: 3px solid #ddd;
+}
+
+.about p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.about .status {
+  color: #666;
+  font-style: italic;
+}
+
+.about .meta {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* ---------- Layout ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* ---------- Facets ---------- */
+
+.facets h3 {
+  margin-top: 18px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #555;
+}
+
+.facets label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ---------- Search ---------- */
+
+.search {
+  width: 100%;
+  max-width: 420px;
+  padding: 6px 8px;
+  margin-bottom: 14px;
+  font-size: 0.95rem;
+}
+
+/* ---------- Table ---------- */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+thead {
+  border-bottom: 2px solid #ccc;
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+  padding: 8px 6px;
+  color: #444;
+  white-space: nowrap;
+}
+
+th.sortable {
+  cursor: pointer;
+}
+
+th.sortable:hover {
+  color: #000;
+}
+
+td {
+  padding: 6px;
+  vertical-align: top;
+  border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+  background: #fafafa;
+}
+
+.year {
+  width: 60px;
+  color: #666;
+}
+
+.authors {
+  max-width: 260px;
+  color: #444;
+}
+
+.journal {
+  white-space: nowrap;
+  color: #444;
+}
