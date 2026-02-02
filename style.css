@@ -71,55 +71,16 @@ h1 {
   font-size: 0.95rem;
 }
 
-/* ---------- Table ---------- */
+/* ---------- Grid tweaks ---------- */
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 0.95rem;
+.gridjs-container {
+  font-size: 0.9rem;
 }
 
-thead {
-  border-bottom: 2px solid #ccc;
-}
-
-th {
-  text-align: left;
-  font-weight: 600;
-  padding: 8px 6px;
-  color: #444;
+.gridjs-th {
   white-space: nowrap;
 }
 
-th.sortable {
-  cursor: pointer;
-}
-
-th.sortable:hover {
-  color: #000;
-}
-
-td {
-  padding: 6px;
+.gridjs-td {
   vertical-align: top;
-  border-bottom: 1px solid #eee;
-}
-
-tr:hover {
-  background: #fafafa;
-}
-
-.year {
-  width: 60px;
-  color: #666;
-}
-
-.authors {
-  max-width: 260px;
-  color: #444;
-}
-
-.journal {
-  white-space: nowrap;
-  color: #444;
 }
