@@ -257,7 +257,86 @@
   "physiology_effects": "positive",
   "source_type": "journal",
   "notes": ""
+},
+
+{
+  "id": "may-2014-plosone",
+  "title": "Detection of Optogenetic Stimulation in Somatosensory Cortex by Non-Human Primates - Towards Artificial Tactile Sensation",
+  "authors": ["May", "Ozden", "Brush", "Borton", "Wagner", "Agha", "Sheinberg", "Nurmikko"],
+  "year": 2014,
+  "journal": "PLOS ONE",
+  "doi": "https://doi.org/10.1371/journal.pone.0114529",
+  "species": ["macaque"],
+  "brain_regions": ["S1"],
+  "opsins": ["C1V1"],
+  "viral_vectors": ["AAV5"],
+  "promoters": ["CaMKIIa"],
+  "histology": "positive",
+  "behavioral_effects": "positive",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+
+{
+  "id": "afraz-2015-pnas",
+  "title": "Optogenetic and pharmacological suppression of spatial clusters of face neurons reveal their causal role in face gender discrimination",
+  "authors": ["Afraz", "Boyden", "DiCarlo"],
+  "year": 2015,
+  "journal": "PNAS",
+  "doi": "https://doi.org/10.1073/pnas.1423328112",
+  "species": ["macaque"],
+  "brain_regions": ["IT cortex"],
+  "opsins": ["ArchT"],
+  "viral_vectors": ["AAV8"],
+  "promoters": ["CAG"],
+  "histology": "positive",
+  "behavioral_effects": "positive",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+
+{
+  "id": "dai-2015-neurophotonics",
+  "title": "Modified toolbox for optogenetics in the nonhuman primate",
+  "authors": ["Dai", "Ozden", "Brooks", "Wagner", "May", "Agha", "Brush", "Borton", "Nurmikko", "Sheinberg"],
+  "year": 2015,
+  "journal": "Neurophotonics",
+  "doi": "https://doi.org/10.1117/1.NPh.2.3.031202",
+  "species": ["macaque"],
+  "brain_regions": ["LIP", "IT", "S1", "PMv"],
+  "opsins": ["C1V1"],
+  "viral_vectors": ["AAV5"],
+  "promoters": ["CaMKIIa"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+{
+  "id": "inoue-2015-natcomms",
+  "title": "Neuronal and behavioural modulations by pathway-selective optogenetic stimulation of the primate oculomotor system",
+  "authors": ["Inoue", "Takada", "Matsumoto"],
+  "year": 2015,
+  "journal": "Nature Communications",
+  "doi": "https://doi.org/10.1038/ncomms9378",
+  "species": ["macaque"],
+  "brain_regions": ["frontal eye field", "superior colliculus"],
+  "opsins": ["ChR2"],
+  "viral_vectors": ["AAV2"],
+  "promoters": ["CMV"],
+  "histology": "positive",
+  "behavioral_effects": "positive",
+  "physiology_effects": "mixed",
+  "source_type": "journal",
+  "notes": ""
 }
+
+
+
+
 
 
 
