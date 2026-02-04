@@ -92,7 +92,7 @@ function makeGrid(data) {
 
       { name: "Journal", sort: true },
       { name: "Species", sort: true },
-      { name: "Brain areas", sort: true },
+      { name: "Areas", sort: true },
       { name: "Opsins", sort: true },
 
       // hidden column to carry doiUrl reliably

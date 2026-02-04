@@ -332,7 +332,27 @@
   "physiology_effects": "mixed",
   "source_type": "journal",
   "notes": ""
+},
+
+{
+  "id": "sahel-2021-nm",
+  "title": "Partial recovery of visual function in a blind patient after optogenetic therapy",
+  "authors": ["Sahel", "Boulanger-Scemama", "Pagot", "Arleo", "Galluppi", "Martel", "Degli Esposti", "Delaux", "de Saint Aubert", "de Montleau", "Gutman", "Audo", "Duebel", "Picaud", "Dalkara", "Blouin", "Taiel", "Roska"],
+  "year": 2021,
+  "journal": "Nature Medicine",
+  "doi": "https://doi.org/10.1038/s41591-021-01351-4",
+  "species": ["human"],
+  "brain_regions": ["retina"],
+  "opsins": ["ChrimsonR"],
+  "viral_vectors": ["AAV2.7m8"],
+  "promoters": ["CAG"],
+  "histology": "not_tested",
+  "behavioral_effects": "positive",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
 }
+
 
 
 
