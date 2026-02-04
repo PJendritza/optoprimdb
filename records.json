@@ -200,7 +200,67 @@
   "physiology_effects": "mixed",
   "source_type": "journal",
   "notes": ""
+},
+
+{
+  "id": "ozden-2013-jnm",
+  "title": "A coaxial optrode as multifunction write-read probe for optogenetic studies in non-human primates",
+  "authors": ["Ozden", "Wang", "Lu", "May", "Lee", "Goo", "OShea", "Kalanithi", "Diester", "Diagne", "Deisseroth", "Shenoy", "Nurmikko"],
+  "year": 2013,
+  "journal": "Journal of Neuroscience Methods",
+  "doi": "https://doi.org/10.1016/j.jneumeth.2013.06.011",
+  "species": ["macaque"],
+  "brain_regions": ["somatosensory cortex", "dorsal premotor cortex"],
+  "opsins": ["C1V1"],
+  "viral_vectors": ["AAV5"],
+  "promoters": ["CaMKIIa"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+
+{
+  "id": "ruiz-2013-jn",
+  "title": "Optogenetics through windows on the brain in the nonhuman primate",
+  "authors": ["Ruiz", "Lustig", "Nassi", "Cetin", "Reynolds", "Albright", "Callaway", "Stoner", "Roe"],
+  "year": 2013,
+  "journal": "Journal of Neurophysiology",
+  "doi": "https://doi.org/10.1152/jn.00153.2013",
+  "species": ["macaque"],
+  "brain_regions": ["V1"],
+  "opsins": ["ChR2", "ArchT", "C1V1"],
+  "viral_vectors": ["lentivirus", "AAV5"],
+  "promoters": ["CaMKIIα"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+
+{
+  "id": "dai-2014-cbc",
+  "title": "Optogenetic and Electrical Microstimulation Systematically Bias Visuospatial Choice in Primates",
+  "authors": ["Dai", "Brooks", "Sheinberg"],
+  "year": 2014,
+  "journal": "Current Biology",
+  "doi": "https://doi.org/10.1016/j.cub.2013.11.011",
+  "species": ["macaque"],
+  "brain_regions": ["lateral intraparietal area (LIP)"],
+  "opsins": ["C1V1"],
+  "viral_vectors": ["AAV5"],
+  "promoters": ["CaMKIIa"],
+  "histology": "not_tested",
+  "behavioral_effects": "positive",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
 }
+
+
+
 
 
 
