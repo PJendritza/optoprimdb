@@ -351,7 +351,69 @@
   "physiology_effects": "positive",
   "source_type": "journal",
   "notes": ""
+},
+
+{
+  "id": "lu-2015-jn",
+  "title": "Optogenetically induced spatiotemporal gamma oscillations and neuronal spiking activity in primate motor cortex",
+  "authors": ["Lu", "Truccolo", "Wagner", "Vargas-Irwin", "Ozden", "Zimmermann", "May", "Agha", "Wang", "Nurmikko"],
+  "year": 2015,
+  "journal": "Journal of Neurophysiology",
+  "doi": "https://doi.org/10.1152/jn.00792.2014",
+  "species": ["macaque"],
+  "brain_regions": ["M1", "PMv"],
+  "opsins": ["C1V1"],
+  "viral_vectors": ["AAV5"],
+  "promoters": ["CaMKIIα"],
+  "histology": "not_tested",
+  "behavioral_effects": "negative",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+{
+  "id": "nassi-2015-neuron",
+  "title": "Optogenetic Activation of Normalization in Alert Macaque Visual Cortex",
+  "authors": ["Nassi", "Avery", "Cetin", "Roe", "Reynolds"],
+  "year": 2015,
+  "journal": "Neuron",
+  "doi": "https://doi.org/10.1016/j.neuron.2015.05.040",
+  "species": ["macaque"],
+  "brain_regions": ["V1"],
+  "opsins": ["C1V1", "eArch3.0"],
+  "viral_vectors": ["lentivirus", "AAV5"],
+  "promoters": ["CaMKIIα"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+
+{
+  "id": "lama-2025-eclinicalmedicine",
+  "title": "Safety and efficacy of MCO-010 optogenetic therapy in patients with Stargardt disease in USA (STARLIGHT): an open-label multi-center Ph2 trial",
+  "authors": ["Lama", "Zak", "Gonzalez", "Gregori", "Chavala", "Batabyal"],
+  "year": 2025,
+  "journal": "eClinicalMedicine",
+  "doi": "https://doi.org/10.1016/j.eclinm.2025.103430",
+  "species": ["human"],
+  "brain_regions": ["retina"],
+  "opsins": ["MCO-010"],
+  "viral_vectors": ["AAV2"],
+  "promoters": ["mGluR6"],
+  "histology": "not_tested",
+  "behavioral_effects": "positive",
+  "physiology_effects": "mixed",
+  "source_type": "journal",
+  "notes": "Viral vector serotype and promoter are not mentioned in this paper but in the references."
 }
+
+
+
+
+
+
 
 
 
