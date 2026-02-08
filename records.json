@@ -407,7 +407,27 @@
   "physiology_effects": "mixed",
   "source_type": "journal",
   "notes": "Viral vector serotype and promoter are not mentioned in this paper but in the references."
+},
+
+{
+  "id": "li-2026-neuron-mesoscale-opto",
+  "title": "A mesoscale optogenetics system for precise and robust stimulation of the primate cortex",
+  "authors": ["Li", "Lu", "Liao", "Zhang", "Tang", "He", "Li", "Zhang", "Leng", "Li", "Poo", "Liu"],
+  "year": 2026,
+  "journal": "Neuron",
+  "doi": "https://doi.org/10.1016/j.neuron.2025.12.001",
+  "species": ["macaque"],
+  "brain_regions": ["V1"],
+  "opsins": ["ChRger"],
+  "viral_vectors": ["AAV2/8"],
+  "promoters": ["CaMKIIa"],
+  "histology": "positive",
+  "behavioral_effects": "positive",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
 }
+
 
 
 
