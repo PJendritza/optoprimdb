@@ -445,7 +445,27 @@
   "physiology_effects": "positive",
   "source_type": "journal",
   "notes": ""
+},
+
+{
+  "id": "chen-2022-elife",
+  "title": "Similar neural and perceptual masking effects of low-power optogenetic stimulation in primate V1",
+  "authors": ["Chen", "Benvenuti", "Chen", "Kumar", "Ramakrishnan", "Deisseroth", "Geisler", "Seidemann"],
+  "year": 2022,
+  "journal": "eLife",
+  "doi": "https://doi.org/10.7554/eLife.68393",
+  "species": ["macaque"],
+  "brain_regions": ["V1"],
+  "opsins": ["C1V1"],
+  "viral_vectors": ["AAV5"],
+  "promoters": ["CaMKIIa"],
+  "histology": "not_tested",
+  "behavioral_effects": "positive",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
 }
+
 
 
 
