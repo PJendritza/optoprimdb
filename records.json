@@ -426,7 +426,27 @@
   "physiology_effects": "positive",
   "source_type": "journal",
   "notes": ""
+},
+
+{
+  "id": "zaraza-2022-crm",
+  "title": "Head-mounted optical imaging and optogenetic stimulation system for use in behaving primates",
+  "authors": ["Zaraza", "Chernov", "Yang", "Rogers", "Roe", "Friedman"],
+  "year": 2022,
+  "journal": "Cell Reports Methods",
+  "doi": "10.1016/j.crmeth.2022.100351",
+  "species": ["macaque"],
+  "brain_regions": ["V2", "V4"],
+  "opsins": ["ChR2(H134R)"],
+  "viral_vectors": ["AAV9", "AAV5"],
+  "promoters": ["CaMKII"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
 }
+
 
 
 
