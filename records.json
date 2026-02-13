@@ -464,7 +464,27 @@
   "physiology_effects": "positive",
   "source_type": "journal",
   "notes": ""
+},
+
+{
+  "id": "ju-2018-plosbio",
+  "title": "Long-term all-optical interrogation of cortical neurons in awake-behaving nonhuman primates",
+  "authors": ["Ju", "Jiang", "Macknik", "Martinez-Conde", "Tang"],
+  "year": 2018,
+  "journal": "PLoS Biology",
+  "doi": "https://doi.org/10.1371/journal.pbio.2005839",
+  "species": ["macaque"],
+  "brain_regions": ["V1"],
+  "opsins": ["C1V1"],
+  "viral_vectors": ["AAV9"],
+  "promoters": ["CamKIIα"],
+  "histology": "not_tested",
+  "behavioral_effects": "positive",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
 }
+
 
 
 
