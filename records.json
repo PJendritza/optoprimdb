@@ -483,7 +483,69 @@
   "physiology_effects": "positive",
   "source_type": "journal",
   "notes": ""
+},
+
+{
+  "id": "yazdan-shahmorad-2016-neuron",
+  "title": "A Large-Scale Interface for Optogenetic Stimulation and Recording in Nonhuman Primates",
+  "authors": ["Yazdan-Shahmorad", "Diaz-Botia", "Hanson", "Kharazia", "Ledochowitsch", "Maharbiz", "Sabes"],
+  "year": 2016,
+  "journal": "Neuron",
+  "doi": "https://doi.org/10.1016/j.neuron.2016.01.013",
+  "species": ["macaque"],
+  "brain_regions": ["S1", "M1"],
+  "opsins": ["C1V1"],
+  "viral_vectors": ["AAV5"],
+  "promoters": ["CamKIIa"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+
+{
+  "id": "yang-2025-jn",
+  "title": "Multimodal Correspondence between Optogenetic fMRI, Electrophysiology, and Anatomical Maps of the Secondary Somatosensory Cortex in Nonhuman Primates",
+  "authors": ["Yang", "Reed", "Yang", "Wang", "Zheng", "Gore", "Chen"],
+  "year": 2025,
+  "journal": "The Journal of Neuroscience",
+  "doi": "https://doi.org/10.1523/JNEUROSCI.2375-24.2025",
+  "species": ["squirrel monkey"],
+  "brain_regions": ["S2"],
+  "opsins": ["ChR2"],
+  "viral_vectors": ["AAV5", "AAV9"],
+  "promoters": ["CaMKIIa"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "notes": ""
+},
+
+{
+  "id": "suzuki-2021-eneuro",
+  "title": "Effects of Optogenetic Suppression of Cortical Input on Primate Thalamic Neuronal Activity during Goal-Directed Behavior",
+  "authors": ["Suzuki", "Inoue", "Takada", "Tanaka"],
+  "year": 2021,
+  "journal": "eNeuro",
+  "doi": "https://doi.org/10.1523/ENEURO.0511-20.2021",
+  "species": ["macaque"],
+  "brain_regions": ["oculomotor thalamus"],
+  "opsins": ["eNpHR3.0"],
+  "viral_vectors": ["AAV2"],
+  "promoters": ["CMV"],
+  "histology": "positive",
+  "behavioral_effects": "negative",
+  "physiology_effects": "mixed",
+  "source_type": "journal",
+  "notes": ""
 }
+
+
+
+
+
 
 
 
