@@ -135,3 +135,32 @@ renderFacet(opsinsDiv, "opsins");
 renderFacet(brainDiv, "brain_regions");
 
 updateGrid();
+
+
+// ---------- fetch last update date from GitHub ----------
+
+async function updateLastModified() {
+  try {
+    const response = await fetch(
+      "https://api.github.com/repos/PJendritza/optoprimdb/commits?path=records.json&page=1&per_page=1"
+    );
+
+    const data = await response.json();
+
+    if (data.length > 0) {
+      const date = new Date(data[0].commit.committer.date);
+
+      const formatted = date.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+      document.getElementById("last-updated").textContent = formatted;
+    }
+  } catch (error) {
+    console.error("Could not fetch last update date:", error);
+  }
+}
+
+updateLastModified();
