@@ -3,6 +3,9 @@ import { Grid, html } from "https://cdn.jsdelivr.net/npm/gridjs@6.2.0/dist/gridj
 // ---------- load data ----------
 const records = await fetch("./records.json").then(r => r.json());
 
+// default sort: Year descending (robust even if year is a string)
+records.sort((a, b) => Number(b.year) - Number(a.year));
+
 // add a normalized doi_url field
 records.forEach(r => {
   if (r.doi) {
@@ -32,15 +35,30 @@ function uniqueValues(field) {
 // ---------- facets ----------
 function renderFacet(container, field) {
   container.innerHTML = "";
-  uniqueValues(field).forEach(v => {
-    const label = document.createElement("label");
-    const cb = document.createElement("input");
-    cb.type = "checkbox";
-    cb.onchange = () => toggleFacet(field, v);
-    label.append(cb, ` ${v}`);
-    container.appendChild(label);
+
+  const data = filteredRecords(); // count based on current filtering
+
+  const counts = {};
+
+  data.forEach(r => {
+    (r[field] || []).forEach(v => {
+      counts[v] = (counts[v] || 0) + 1;
+    });
   });
+
+  Object.keys(counts)
+    .sort()
+    .forEach(v => {
+      const label = document.createElement("label");
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.checked = selected[field].includes(v);
+      cb.onchange = () => toggleFacet(field, v);
+      label.append(cb, ` ${v} (${counts[v]})`);
+      container.appendChild(label);
+    });
 }
+
 
 function toggleFacet(field, value) {
   const arr = selected[field];
@@ -118,7 +136,7 @@ function makeGrid(data) {
 
     sort: true,
 
-    pagination: { limit: 15 }
+    //pagination: { limit: 15 }
   });
 }
 
