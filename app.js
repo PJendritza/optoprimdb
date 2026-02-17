@@ -6,6 +6,9 @@ const records = await fetch("./records.json").then(r => r.json());
 // default sort: Year descending (robust even if year is a string)
 records.sort((a, b) => Number(b.year) - Number(a.year));
 
+// total DB size
+document.getElementById("total-count").textContent = records.length;
+
 // add a normalized doi_url field
 records.forEach(r => {
   if (r.doi) {
