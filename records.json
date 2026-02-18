@@ -600,7 +600,28 @@
   "source_type": "journal",
   "date_added": "2026-02-17",
   "notes": ""
+},
+
+{
+  "id": "zaaimi-2023-natbiomedeng",
+  "title": "Closed-loop optogenetic control of the dynamics of neural activity in non-human primates",
+  "authors": ["Zaaimi", "Turnbull", "Hazra", "Wang", "Gandara", "McLeod", "McDermott", "Escobedo-Cousin", "Idil", "Bailey", "Tardio", "Patel", "Ponon", "Gausden", "Walsh", "Hutchings", "Kaiser", "Cunningham", "Clowry", "LeBeau", "Constandinou", "Baker", "Donaldson", "Degenaar", "Jackson"],
+  "year": 2023,
+  "journal": "Nature Biomedical Engineering",
+  "doi": "https://doi.org/10.1038/s41551-022-00945-8",
+  "species": ["macaque"],
+  "brain_regions": ["M1"],
+  "opsins": ["ChR2", "Chronos"],
+  "viral_vectors": ["AAV8", "lentivirus"],
+  "promoters": ["hSyn"],
+  "histology": "positive",
+  "behavioral_effects": "not_tested",
+  "physiology_effects": "positive",
+  "source_type": "journal",
+  "date_added": "2026-02-18",
+  "notes": ""
 }
+
 
 
 
