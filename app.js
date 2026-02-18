@@ -185,3 +185,13 @@ async function updateLastModified() {
 }
 
 updateLastModified();
+
+// ---------- mobile filter toggle ----------
+
+const filterBtn = document.getElementById("filter-toggle");
+
+if (filterBtn) {
+  filterBtn.onclick = () => {
+    document.querySelector(".facets").classList.toggle("open");
+  };
+}

@@ -128,3 +128,81 @@ h1 {
 .gridjs-table a:hover {
   text-decoration: underline;
 }
+
+
+/* ===================================================== */
+/* ==================== MOBILE ========================= */
+/* ===================================================== */
+
+/* Layout collapse */
+@media (max-width: 900px) {
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .facets {
+    order: 2;
+    display: none;
+  }
+
+  .facets.open {
+    display: block;
+  }
+
+  main {
+    order: 1;
+  }
+
+}
+
+/* Filter button */
+.filter-toggle {
+  display: none;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .filter-toggle {
+    display: block;
+  }
+}
+
+/* Make table scroll horizontally on small screens */
+main {
+  overflow-x: auto;
+}
+
+.gridjs-table {
+  min-width: 900px;
+}
+
+/* Make checkboxes easier to tap */
+@media (max-width: 900px) {
+
+  .facets label {
+    padding: 1px 0;
+  }
+
+  .facets input {
+    transform: scale(1.2);
+    margin-right: 6px;
+  }
+
+}
+
+
+/* Smaller margins on very small screens */
+@media (max-width: 600px) {
+  body {
+    margin: 14px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}
