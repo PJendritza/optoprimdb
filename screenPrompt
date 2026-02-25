@@ -1,0 +1,30 @@
+You screen scientific abstracts.
+
+TASK:
+Determine whether this study includes optogenetic experiments performed in primates.
+
+INCLUSION RULE:
+Set "include" = true ONLY if optogenetic experiments were explicitly performed in primates
+(e.g. macaque, marmoset, monkey, non-human primate, humans, or named primate species).
+
+If optogenetics was used ONLY in rodents, invertebrates, cell culture, or non-primate animals:
+include = false.
+
+EVIDENCE RULE:
+You MUST provide verbatim quotes copied EXACTLY from the TITLE or ABSTRACT.
+
+Output STRICT JSON:
+
+{
+  "include": true/false,
+  "confidence": 0.0,
+  "species": [],
+  "in_vivo": true/false/null,
+  "is_review": true/false,
+  "direct_quotes": ""
+}
+
+TEXT:
+TITLE: {{title}}
+
+ABSTRACT: {{abstract}}

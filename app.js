@@ -1,197 +1,177 @@
-import { Grid, html } from "https://cdn.jsdelivr.net/npm/gridjs@6.2.0/dist/gridjs.module.js";
+const byId = (id) => document.getElementById(id);
 
-// ---------- load data ----------
-const records = await fetch("./records.json").then(r => r.json());
+let records = [];
+let sortKey = "row";
+let sortAsc = true;
+let activeJobId = null;
 
-// default sort: Year descending (robust even if year is a string)
-records.sort((a, b) => Number(b.year) - Number(a.year));
+const tbody = byId("records-table").querySelector("tbody");
 
-// total DB size
-document.getElementById("total-count").textContent = records.length;
+async function api(path, opts = {}) {
+  const res = await fetch(path, {
+    headers: { "Content-Type": "application/json" },
+    ...opts,
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
 
-// add a normalized doi_url field
-records.forEach(r => {
-  if (r.doi) {
-    r.doi_url = r.doi.startsWith("http") ? r.doi : `https://doi.org/${r.doi}`;
-  } else {
-    r.doi_url = "";
+function selectedSearch() {
+  return byId("active-search").value;
+}
+
+function parseSelectedRows() {
+  const manual = byId("selected-rows").value.trim();
+  const fromInput = manual
+    ? manual.split(",").map((x) => Number(x.trim())).filter((x) => Number.isInteger(x) && x > 0)
+    : [];
+  const checked = [...document.querySelectorAll(".row-select:checked")].map((x) => Number(x.dataset.row));
+  return [...new Set([...fromInput, ...checked])].sort((a, b) => a - b);
+}
+
+function updateProgress(job) {
+  if (!job) {
+    byId("progress-text").textContent = "Idle";
+    byId("progress").value = 0;
+    return;
   }
-});
+  const total = job.total || 0;
+  const done = job.done || 0;
+  const pct = total ? (done / total) * 100 : 0;
+  byId("progress").value = pct;
+  byId("progress-text").textContent = `${job.type}: ${job.status} — ${job.message || ""} (${done}/${total})`;
+}
 
-const speciesDiv = document.getElementById("species");
-const opsinsDiv  = document.getElementById("opsins");
-const brainDiv   = document.getElementById("brain_areas");
+async function refreshSearchList() {
+  const list = await api("/api/searches");
+  const sel = byId("active-search");
+  const current = sel.value;
+  sel.innerHTML = "";
+  list.forEach((s) => {
+    const opt = document.createElement("option");
+    opt.value = s.name;
+    opt.textContent = `${s.name} — ${s.query}`;
+    sel.appendChild(opt);
+  });
+  if (current && [...sel.options].some((o) => o.value === current)) {
+    sel.value = current;
+  }
+}
 
-let selected = {
-  species: [],
-  opsins: [],
-  brain_regions: []
+function renderTable() {
+  const sorted = [...records].sort((a, b) => {
+    const iA = a.__row;
+    const iB = b.__row;
+    if (sortKey === "row") return sortAsc ? iA - iB : iB - iA;
+
+    const vA = a[sortKey];
+    const vB = b[sortKey];
+    const nA = Number(vA);
+    const nB = Number(vB);
+    let cmp = 0;
+    if (!Number.isNaN(nA) && !Number.isNaN(nB)) cmp = nA - nB;
+    else cmp = String(vA ?? "").localeCompare(String(vB ?? ""));
+    return sortAsc ? cmp : -cmp;
+  });
+
+  tbody.innerHTML = "";
+  sorted.forEach((r) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${r.__row}</td>
+      <td><input type="checkbox" class="row-select" data-row="${r.__row}"></td>
+      <td>${r.title || ""}</td>
+      <td>${r.abstract_fetched ? "yes" : "no"}</td>
+      <td>${r.processed ? "done" : "pending"}</td>
+      <td>${r.include === null ? "" : String(r.include)}</td>
+      <td>${r.confidence ?? ""}</td>
+      <td>${(r.species || []).join(", ")}</td>
+      <td>${r.direct_quotes || ""}</td>
+      <td>${r.processed ? "true" : "false"}</td>
+      <td><button class="rerun" data-row="${r.__row}">Re-run</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  document.querySelectorAll(".rerun").forEach((btn) => {
+    btn.onclick = () => runJob(`/api/searches/${selectedSearch()}/rerun/${btn.dataset.row}`, { method: "POST" });
+  });
+}
+
+async function refreshRecords() {
+  const name = selectedSearch();
+  if (!name) return;
+  const data = await api(`/api/searches/${name}/records`);
+  records = data.records.map((r, idx) => ({ ...r, __row: idx + 1 }));
+  byId("s-total").textContent = data.counts.total;
+  byId("s-abstract").textContent = data.counts.abstract_fetched;
+  byId("s-processed").textContent = data.counts.processed;
+  renderTable();
+}
+
+async function pollJob() {
+  if (!activeJobId) return;
+  const job = await api(`/api/jobs/${activeJobId}`);
+  updateProgress(job);
+  if (["completed", "failed", "stopped"].includes(job.status)) {
+    activeJobId = null;
+    await refreshRecords();
+    return;
+  }
+  setTimeout(pollJob, 1000);
+}
+
+async function runJob(path, opts) {
+  const out = await api(path, opts);
+  activeJobId = out.job_id;
+  pollJob();
+}
+
+byId("create-search").onclick = async () => {
+  await api("/api/searches", {
+    method: "POST",
+    body: JSON.stringify({
+      name: byId("search-name").value,
+      query: byId("search-query").value,
+      email: byId("search-email").value,
+    }),
+  });
+  await refreshSearchList();
 };
 
-let grid;
-
-// ---------- helpers ----------
-function uniqueValues(field) {
-  return [...new Set(records.flatMap(r => r[field] || []))].sort();
-}
-
-// ---------- facets ----------
-function renderFacet(container, field) {
-  container.innerHTML = "";
-
-  const data = filteredRecords(); // count based on current filtering
-
-  const counts = {};
-
-  data.forEach(r => {
-    (r[field] || []).forEach(v => {
-      counts[v] = (counts[v] || 0) + 1;
-    });
+byId("btn-search").onclick = () => runJob(`/api/searches/${selectedSearch()}/search_pubmed`, { method: "POST" });
+byId("btn-fetch").onclick = () => runJob(`/api/searches/${selectedSearch()}/fetch_abstracts`, { method: "POST" });
+byId("btn-run-all").onclick = () =>
+  runJob(`/api/searches/${selectedSearch()}/run_sciscreen`, {
+    method: "POST",
+    body: JSON.stringify({ mode: "all", selected_rows: [] }),
   });
 
-  Object.keys(counts)
-    .sort()
-    .forEach(v => {
-      const label = document.createElement("label");
-      const cb = document.createElement("input");
-      cb.type = "checkbox";
-      cb.checked = selected[field].includes(v);
-      cb.onchange = () => toggleFacet(field, v);
-      label.append(cb, ` ${v} (${counts[v]})`);
-      container.appendChild(label);
-    });
-}
-
-
-function toggleFacet(field, value) {
-  const arr = selected[field];
-  const i = arr.indexOf(value);
-  if (i >= 0) arr.splice(i, 1);
-  else arr.push(value);
-  updateGrid();
-}
-
-// ---------- filtering ----------
-function filteredRecords() {
-  return records.filter(r =>
-    (!selected.species.length || selected.species.some(s => r.species.includes(s))) &&
-    (!selected.opsins.length  || selected.opsins.some(o => r.opsins.includes(o))) &&
-    (!selected.brain_regions.length || selected.brain_regions.some(b => r.brain_regions.includes(b)))
-  );
-}
-
-// ---------- grid ----------
-function makeGrid(data) {
-  return new Grid({
-    columns: [
-      { name: "Year", sort: true },
-
-      {
-        name: "Title",
-        sort: true,
-        formatter: (cell, row) => {
-          // last column is the hidden doi_url
-          const doiUrl = row.cells[row.cells.length - 1].data;
-
-          if (!doiUrl) {
-            return html(`<span title="${cell}">${cell}</span>`);
-          }
-
-          return html(`
-            <a href="${doiUrl}" target="_blank" rel="noopener" title="Open DOI">
-              ${cell}
-            </a>
-          `);
-        }
-      },
-
-      {
-        name: "Authors",
-        sort: true,
-        formatter: cell => html(`<span title="${cell}">${cell}</span>`)
-      },
-
-      { name: "Journal", sort: true },
-      { name: "Species", sort: true },
-      { name: "Areas", sort: true },
-      { name: "Opsins", sort: true },
-
-      // hidden column to carry doiUrl reliably
-      { name: "doi_url", hidden: true }
-    ],
-
-    data: data.map(r => [
-      r.year,
-      r.title,
-      r.authors.join(", "),
-      r.journal,
-      r.species.join(", "),
-      r.brain_regions.join(", "),
-      r.opsins.join(", "),
-      r.doi_url
-    ]),
-
-    search: true,
-
-    language: {
-      search: { placeholder: "Search…" }
-    },
-
-    sort: true,
-
-    //pagination: { limit: 15 }
+byId("btn-run-selected").onclick = () =>
+  runJob(`/api/searches/${selectedSearch()}/run_sciscreen`, {
+    method: "POST",
+    body: JSON.stringify({ mode: "selected", selected_rows: parseSelectedRows() }),
   });
-}
 
-function updateGrid() {
-  const data = filteredRecords();
-  if (grid) grid.destroy();
-  grid = makeGrid(data);
-  grid.render(document.getElementById("grid"));
-}
+byId("btn-stop").onclick = async () => {
+  if (!activeJobId) return;
+  await api(`/api/jobs/${activeJobId}/stop`, { method: "POST" });
+};
 
-// ---------- init ----------
-renderFacet(speciesDiv, "species");
-renderFacet(opsinsDiv, "opsins");
-renderFacet(brainDiv, "brain_regions");
+byId("refresh").onclick = refreshRecords;
+byId("active-search").onchange = refreshRecords;
 
-updateGrid();
-
-
-// ---------- fetch last update date from GitHub ----------
-
-async function updateLastModified() {
-  try {
-    const response = await fetch(
-      "https://api.github.com/repos/PJendritza/optoprimdb/commits?path=records.json&page=1&per_page=1"
-    );
-
-    const data = await response.json();
-
-    if (data.length > 0) {
-      const date = new Date(data[0].commit.committer.date);
-
-      const formatted = date.toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      });
-
-      document.getElementById("last-updated").textContent = formatted;
+document.querySelectorAll("#records-table th[data-sort]").forEach((th) => {
+  th.onclick = () => {
+    const key = th.dataset.sort;
+    if (sortKey === key) sortAsc = !sortAsc;
+    else {
+      sortKey = key;
+      sortAsc = true;
     }
-  } catch (error) {
-    console.error("Could not fetch last update date:", error);
-  }
-}
-
-updateLastModified();
-
-// ---------- mobile filter toggle ----------
-
-const filterBtn = document.getElementById("filter-toggle");
-
-if (filterBtn) {
-  filterBtn.onclick = () => {
-    document.querySelector(".facets").classList.toggle("open");
+    renderTable();
   };
-}
+});
+
+await refreshSearchList();
+await refreshRecords();

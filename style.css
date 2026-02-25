@@ -1,208 +1,104 @@
 body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  margin: 24px;
-  color: #222;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  color: #1f2937;
 }
 
 h1 {
-  margin-bottom: 10px;
-}
-
-/* ---------- About block ---------- */
-
-.about {
-  max-width: 900px;
-  margin-bottom: 26px;
-  padding-left: 12px;
-  border-left: 3px solid #ddd;
-}
-
-.about p {
-  margin: 6px 0;
-  font-size: 0.95rem;
-  line-height: 1.45;
-}
-
-.about .status {
-  color: #666;
-  font-style: italic;
-}
-
-.about .meta {
-  color: #888;
-  font-size: 0.85rem;
-}
-
-/* ---------- Layout ---------- */
-
-.layout {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 28px;
-  align-items: start;
-}
-
-/* ---------- Facets ---------- */
-
-.facets h3 {
-  margin-top: 18px;
-  margin-bottom: 6px;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #555;
-}
-
-.facets label {
-  display: block;
-  font-size: 0.95rem;
   margin-bottom: 4px;
-  cursor: pointer;
-  user-select: none;
 }
 
-/* ---------- Search ---------- */
-
-.search {
-  width: 100%;
-  max-width: 420px;
-  padding: 6px 8px;
-  margin-bottom: 14px;
-  font-size: 0.95rem;
+.subtitle {
+  margin-top: 0;
+  color: #4b5563;
 }
 
-/* ---------- Grid.js tweaks ---------- */
-
-.gridjs-table {
-  font-size: 0.95rem;
-}
-
-/* Year */
-.gridjs-th:nth-child(1),
-.gridjs-td:nth-child(1) {
-  min-width: 70px;
-  text-align: center;
-}
-
-/* Title */
-.gridjs-th:nth-child(2),
-.gridjs-td:nth-child(2) {
-  min-width: 360px;
-}
-
-/* Authors */
-.gridjs-th:nth-child(3),
-.gridjs-td:nth-child(3) {
-  min-width: 260px;
-}
-
-/* Journal */
-.gridjs-th:nth-child(4),
-.gridjs-td:nth-child(4) {
-  white-space: nowrap;
-}
-
-/* Species */
-.gridjs-th:nth-child(5),
-.gridjs-td:nth-child(5) {
-  min-width: 120px;
-}
-
-/* Brain areas */
-.gridjs-th:nth-child(6),
-.gridjs-td:nth-child(6) {
-  min-width: 220px;
-}
-
-/* Opsins */
-.gridjs-th:nth-child(7),
-.gridjs-td:nth-child(7) {
-  min-width: 120px;
-}
-
-.gridjs-table a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.gridjs-table a:hover {
-  text-decoration: underline;
-}
-
-
-/* ===================================================== */
-/* ==================== MOBILE ========================= */
-/* ===================================================== */
-
-/* Layout collapse */
-@media (max-width: 900px) {
-
-  .layout {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .facets {
-    order: 2;
-    display: none;
-  }
-
-  .facets.open {
-    display: block;
-  }
-
-  main {
-    order: 1;
-  }
-
-}
-
-/* Filter button */
-.filter-toggle {
-  display: none;
+.panel {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 12px;
   margin-bottom: 12px;
-  padding: 8px 12px;
-  font-size: 0.95rem;
+  background: #fff;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: end;
+  margin-bottom: 8px;
+}
+
+label {
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+}
+
+input,
+select,
+button {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.actions button {
+  font-weight: 600;
+}
+
+button.danger {
+  background: #fee2e2;
+}
+
+#progress-wrap {
+  display: grid;
+  gap: 4px;
+}
+
+progress {
+  width: 100%;
+}
+
+.status-grid {
+  display: flex;
+  gap: 18px;
+  font-size: 16px;
+}
+
+#records-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+#records-table th,
+#records-table td {
+  border: 1px solid #e5e7eb;
+  padding: 6px;
+  vertical-align: top;
+  font-size: 13px;
+}
+
+#records-table th {
+  background: #f9fafb;
   cursor: pointer;
 }
 
+#records-table td:nth-child(3),
+#records-table td:nth-child(9) {
+  word-break: break-word;
+}
+
 @media (max-width: 900px) {
-  .filter-toggle {
-    display: block;
-  }
-}
-
-/* Make table scroll horizontally on small screens */
-main {
-  overflow-x: auto;
-}
-
-.gridjs-table {
-  min-width: 900px;
-}
-
-/* Make checkboxes easier to tap */
-@media (max-width: 900px) {
-
-  .facets label {
-    padding: 1px 0;
-  }
-
-  .facets input {
-    transform: scale(1.2);
-    margin-right: 6px;
-  }
-
-}
-
-
-/* Smaller margins on very small screens */
-@media (max-width: 600px) {
   body {
-    margin: 14px;
+    margin: 10px;
   }
 
-  h1 {
-    font-size: 1.6rem;
+  .panel {
+    overflow-x: auto;
+  }
+
+  #records-table {
+    min-width: 1200px;
   }
 }

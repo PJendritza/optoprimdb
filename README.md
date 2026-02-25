@@ -1,17 +1,47 @@
-# OptoPrimDB
+# SciScreen
 
-https://patrickjendritza.com/optoprimdb/
+SciScreen is a browser-based system for restart-safe AI-assisted PubMed literature screening.
 
-OptoPrimDB is an early-stage, experimental database of published optogenetics
-studies in primates.
+## Stack
+- FastAPI backend (`main.py`)
+- Static frontend (`index.html`, `app.js`, `style.css`)
+- PubMed retrieval via BioPython Entrez
+- LLM screening via GWDG OpenAI-compatible API
+- Local per-search JSONL persistence in `searches/<search_name>/`
 
-This repository contains a static, client-side prototype that allows browsing,
-searching, filtering, and sorting paper-level metadata using a JSON dataset.
+## Run
 
-⚠️ This is a very early testing version:
-- the dataset is incomplete
-- the schema may evolve
-- the UI is subject to change
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
 
-Created by Patrick Jendritza  
-Last updated: February 2026
+Open: `http://127.0.0.1:8000`
+
+## Environment
+
+```bash
+export GWDG_API_KEY="..."
+export GWDG_MODEL="apertus-70b-instruct-2509"  # optional
+export GWDG_BASE_URL="https://chat-ai.academiccloud.de/v1"  # optional
+```
+
+## Workflow
+1. Create a search (name + query + Entrez email).
+2. Click **SEARCH PUBMED**.
+3. Click **FETCH ABSTRACTS**.
+4. Click **RUN SciScreen (all unprocessed)** or **RUN SciScreen (selected records)**.
+5. Use **STOP ACTIVE JOB** to interrupt and resume later.
+
+## Data layout
+
+```
+searches/<search_name>/
+  search_meta.json
+  pmids.csv
+  screening.jsonl
+```
+
+The external screening prompt template is in `screenPrompt`.

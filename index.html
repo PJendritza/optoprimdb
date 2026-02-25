@@ -3,67 +3,72 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OptoPrimDB</title>
-
-  <!-- Grid.js theme -->
-  <link
-    href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
-    rel="stylesheet"
-  />
-
+  <title>SciScreen</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <h1>SciScreen</h1>
+  <p class="subtitle">AI-assisted literature screening with restart-safe PubMed + LLM pipeline.</p>
 
-<h1>OptoPrimDB</h1>
+  <section class="panel">
+    <div class="row">
+      <label>Search name <input id="search-name" placeholder="my_search" /></label>
+      <label>PubMed query <input id="search-query" placeholder="optogenetics primate" /></label>
+      <label>Entrez email <input id="search-email" placeholder="you@example.com" /></label>
+      <button id="create-search">Create Search</button>
+    </div>
 
-<div class="about">
-  <p>
-    <strong>OptoPrimDB</strong> is an early-stage, experimental database aiming to
-    collect and organize published optogenetics studies in primates, including humans.
-    It provides a searchable overview of the literature using standardized,
-    paper-level metadata.
-  </p>
+    <div class="row actions">
+      <button id="btn-search">SEARCH PUBMED</button>
+      <button id="btn-fetch">FETCH ABSTRACTS</button>
+      <button id="btn-run-all">RUN SciScreen (all unprocessed)</button>
+      <button id="btn-run-selected">RUN SciScreen (selected records)</button>
+      <button id="btn-stop" class="danger">STOP ACTIVE JOB</button>
+    </div>
 
-  <p class="status">
-    This is a very early testing version. The database is incomplete and the
-    structure is still evolving.
-  </p>
+    <div class="row">
+      <label>Selected row numbers (comma-separated) <input id="selected-rows" placeholder="1,4,12" /></label>
+      <label>Active search
+        <select id="active-search"></select>
+      </label>
+      <button id="refresh">Refresh</button>
+    </div>
 
-  <p class="meta">
-    Created by Patrick Jendritza · 
-    Last updated: <span id="last-updated">Loading…</span> · 
-    <span id="total-count">–</span> entries
-  </p>
+    <div id="progress-wrap">
+      <div id="progress-text">Idle</div>
+      <progress id="progress" value="0" max="100"></progress>
+    </div>
+  </section>
 
-</div>
+  <section class="panel">
+    <div class="status-grid">
+      <div>Total: <strong id="s-total">0</strong></div>
+      <div>Abstract fetched: <strong id="s-abstract">0</strong></div>
+      <div>Processed: <strong id="s-processed">0</strong></div>
+    </div>
+  </section>
 
-<button id="filter-toggle" class="filter-toggle">Filters</button>
+  <section class="panel">
+    <table id="records-table">
+      <thead>
+        <tr>
+          <th data-sort="row">#</th>
+          <th>Select</th>
+          <th data-sort="title">Title</th>
+          <th data-sort="abstract_fetched">Abstract fetched status</th>
+          <th data-sort="processed">LLM run status</th>
+          <th data-sort="include">Include decision</th>
+          <th data-sort="confidence">Confidence score</th>
+          <th data-sort="species">Species</th>
+          <th data-sort="direct_quotes">Literal evidence quotes</th>
+          <th data-sort="processed">Processed flag</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
 
-
-<div class="layout">
-
-  <aside class="facets">
-    <h3>Species</h3>
-    <div id="species"></div>
-
-    <h3>Opsins</h3>
-    <div id="opsins"></div>
-
-    <h3>Brain areas</h3>
-    <div id="brain_areas"></div>
-  </aside>
-
-  <main>
-
-    <div id="grid"></div>
-  </main>
-
-</div>
-
-<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-<script type="module" src="app.js"></script>
-
+  <script type="module" src="app.js"></script>
 </body>
 </html>
